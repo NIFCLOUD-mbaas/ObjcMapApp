@@ -2,11 +2,13 @@
 //  AppDelegate.m
 //  ObjcMapApp
 //
-//  Created by oono on 2016/08/18.
-//  Copyright © 2016年 Nifty. All rights reserved.
+//  Created by nifty on 2016/08/18.
+//  Copyright © 2016年 NIFTY Corporation. All rights reserved.
 //
 
 #import "AppDelegate.h"
+#import <NCMB/NCMB.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 @interface AppDelegate ()
 
@@ -16,7 +18,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    // mBaaS初期化
+    [NCMB setApplicationKey:@"YOUR_NCMB_APPLICATIONKEY"
+                  clientKey:@"YOUR_NCMB_CLIENTKEY"];
+    // GoogleMaps初期化
+    [GMSServices provideAPIKey:@"YOUR_GOOGLE_MAPS_APYKEY"];
     return YES;
 }
 
