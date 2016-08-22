@@ -1,4 +1,4 @@
-# 【iOS Swift】地図アプリを作ろう！
+# 【iOS Objective-C】地図アプリを作ろう！
 ![画像001](/readme-img/001.png)
 
 ## 概要
@@ -60,7 +60,7 @@
 
 下記リンクをクリックしてサンプルプロジェクトをダウンロードします▼
 
-　　　　　[__SwiftMapApp__](https://github.com/natsumo/SwiftMapApp/archive/master.zip)
+　　　　　[__ObjcMapApp__](https://github.com/natsumo/ObjcMapApp/archive/master.zip)
 
 * フォルダを確認します
 
@@ -68,7 +68,7 @@
 
 ### 2. CocoapodsでmBaaS SDKとGoogle Map SDKのインストール
 
-* ダウンロードしたフォルダ内にある「SwiftMapApp.xcodeproj」と同じディレクトリにターミナル上で移動します
+* ダウンロードしたフォルダ内にある「ObjcMapApp.xcodeproj」と同じディレクトリにターミナル上で移動します
  * 注意：これをやっておかないと失敗します！
 
 ```bash
@@ -108,7 +108,7 @@ $ pod install --no-repo-update
 ```
 
 * フォルダを確認します
- * 下記のように、「Podfile.lock」ファイル, 「Pods」フォルダと「SwiftMapApp.xcworkspace」の３点が増えていることが確認できればOKです
+ * 下記のように、「Podfile.lock」ファイル, 「Pods」フォルダと「ObjcMapApp.xcworkspace」の３点が増えていることが確認できればOKです
 
 ![画像011](/readme-img/011.png)
 
@@ -169,11 +169,11 @@ $ pod install --no-repo-update
 ![画像GCP005](/readme-img/GCP005.png)
 
 ### 6. mBaaSとGoogle Map 双方のAPIキーを設定
-* 「SwiftMapApp.xcworkspace」をダブルクリックしてXcodeを起動します
+* 「ObjcMapApp.xcworkspace」をダブルクリックしてXcodeを起動します
 
 ![画像014](/readme-img/014.png)
 
-* プロジェクトが開いたら、`AppDelegate.swift`を編集します
+* プロジェクトが開いたら、`AppDelegate.m`を編集します
 * 先程[mBaaS](http://mb.cloud.nifty.com/)のダッシュボード上で確認したAPIキーと[Google Cloud platform](https://console.cloud.google.com/)で発行したAPIキーを貼り付けます
 
 ![画像007](/readme-img/007.png)
@@ -219,22 +219,19 @@ $ pod install --no-repo-update
 サンプルプロジェクトに実装済みの内容のご紹介
 
 ### mBaaSの初期設定
-* SDKの詳しい導入方法は、mBaaS の[ドキュメント（クイックスタート）](http://mb.cloud.nifty.com/doc/current/introduction/quickstart_ios.html)をSwift版に書き換えたドキュメントをご用意していますので、ご活用ください
+* SDKの詳しい導入方法は、mBaaS の[ドキュメント（クイックスタート）](http://mb.cloud.nifty.com/doc/current/introduction/quickstart_ios.html)をObjc版に書き換えたドキュメントをご用意していますので、ご活用ください
 
-　　　　　__[【Swift版】ドキュメント（クイックスタート）](https://github.com/NIFTYCloud-mbaas/NCMB_SwiftQuickStart)__
+　　　　　__[【Objc版】ドキュメント（クイックスタート）](https://github.com/NIFTYCloud-mbaas/NCMB_ObjcQuickStart)__
 
 
 * SDKの読み込みは下記のコードで行っています
-```swift
-import NCMB
+```objc
+#import <NCMB/NCMB.h>
 ```
 * SDKの初期化は下記のコードで行っています
-```swift
-// mBaaS APIkey
-let applicationkey = "YOUR_NCMB_APPLICATIONKEY"
-let clientkey = "YOUR_NCMB_CLIENTKEY"
+```objc
 // mBaaS初期化
-NCMB.setApplicationKey(applicationkey, clientKey: clientkey)
+[NCMB setApplicationKey:@"YOUR_NCMB_APPLICATIONKEY" clientKey:@"YOUR_NCMB_CLIENTKEY"];
 ```
 ※「`YOUR_APPLICATION_KEY`」と「`YOUR_CLIENT_KEY`」は、mBaaSのダッシュボードで発行したAPIキーに置き換えます
 
@@ -243,24 +240,22 @@ NCMB.setApplicationKey(applicationkey, clientKey: clientkey)
 * SDKの詳しい導入方法は、[Google Maps API](https://developers.google.com/maps/)のiOS向け（Maps SDK for iOS）__[スタートガイド](https://developers.google.com/maps/documentation/ios-sdk/start)__（日本語）をご活用ください
 
 * SDKの読み込みは下記のコードで行っています
-```swift
-import GoogleMaps
+```objc
+#import <GoogleMaps/GoogleMaps.h>
 ```
 * SDKの初期化は下記のコードで行っています
-```swift
-// Google Maps APIkey
-let googleMapsAPIkey = "YOUR_GOOGLE_MAPS_APYKEY"
+```objc
 // GoogleMaps初期化
-GMSServices.provideAPIKey(googleMapsAPIkey)
+[GMSServices provideAPIKey:@"YOUR_GOOGLE_MAPS_APYKEY"];
 ```
 ※「`YOUR_GOOGLE_MAPS_APYKEY`」は、Google Cloud Platformのダッシュボードで発行したAPIキーに置き換えます
 
 ### 位置情報取得のための設定
 
-* `CoreLocation.framework`を追加をし、ViewcControllerで読み込みをしています
+* `CoreLocation.framework`を追加をし、ViewControllerで読み込みをしています
 
 
-```swift
+```objc
 import CoreLocation
 ```
 
@@ -278,53 +273,53 @@ import CoreLocation
 ```
 
 ### ロジックの紹介
-* `Main.storyboard`でデザインを作成し、`ViewController.swift`にロジックを書いています
+* `Main.storyboard`でデザインを作成し、`ViewController.m`にロジックを書いています
 * mBaaSに位置情報を保存するコードと取得するコードについて抜粋して紹介します
 
 #### 位置情報の保存・取得
 
 * 位置情報の保存
 
-```swift
- /** 【mBaaS：データストア】位置情報の保存 **/
- // NCMBGeoPointの生成
-let geoPoint = NCMBGeoPoint(latitude: atof(lat), longitude: atof(lon))
+```objc
+/** 【mBaaS：データストア】位置情報の保存 **/
+// NCMBGeoPointの生成
+NCMBGeoPoint *geoPoint = [NCMBGeoPoint geoPointWithLatitude:lat.doubleValue longitude:lon.doubleValue];
 // NCMBObjectを生成
-let object = NCMBObject(className: "GeoPoint")
+NCMBObject *object = [NCMBObject objectWithClassName:@"GeoPoint"];
 // 値を設定
-object.setObject(geoPoint, forKey: "geolocation")
-object.setObject(title, forKey: "title")
-object.setObject(snippet, forKey: "snippet")
+[object setObject:geoPoint forKey:@"geolocation"];
+[object setObject:title forKey:@"title"];
+[object setObject:snippet forKey:@"snippet"];
 // 保存の実施
-object.saveInBackgroundWithBlock { (error: NSError!) -> Void in
-    if error != nil {
+[object saveInBackgroundWithBlock:^(NSError *error) {
+    if (error) {
         // 位置情報保存失敗時の処理
 
-     } else {
-         // 位置情報保存成功時の処理
+    } else {
+        // 位置情報保存成功時の処理
 
     }
-}
+}];
 ```
 
 #### 位置情報取得
 
 * 全件検索（検索条件なし）の場合
 
-```swift
+```objc
 /** 【mBaaS：データストア(位置情報)】 保存データの取得 **/
 // クラスの検索クエリを作成
-let queryGeoPoint = NCMBQuery(className: "GeoPoint")
+NCMBQuery *queryGeoPoint = [NCMBQuery queryWithClassName:@"GeoPoint"];
 // データストアを検索
-queryGeoPoint.findObjectsInBackgroundWithBlock({ (objects: Array!, error: NSError!) -> Void in
-    if error != nil {
+[queryGeoPoint findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    if (error) {
         // 検索失敗時の処理
 
     } else {
         // 検索成功時の処理
 
     }
-})
+}];
 ```
 
 * 検索条件ありの場合
@@ -332,16 +327,16 @@ queryGeoPoint.findObjectsInBackgroundWithBlock({ (objects: Array!, error: NSErro
 
 __＜円形検索＞__
 
-```swift
+```objc
 // 現在地から半径5km以内に該当する位置情報を検索
-queryGeoPoint.whereKey("geolocation", nearGeoPoint: geoPoint, withinKilometers: 5.0)
+[queryGeoPoint whereKey:@"geolocation" nearGeoPoint:geoPoint withinKilometers:5.0f];
 
 ```
 
 __＜矩形検索＞__
-```swift
+```objc
 // 新宿駅と西新宿駅の間
-queryGeoPoint.whereKey("geolocation", withinGeoBoxFromSouthwest: shinjukuGeoPoint, toNortheast: westShinjukuGeoPoint)
+[queryGeoPoint whereKey:@"geolocation" withinGeoBoxFromSouthwest:shinjukuGeoPoint toNortheast:westShinjukuGeoPoint];
 ```
 
 ## 参考
