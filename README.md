@@ -342,5 +342,5 @@ __＜矩形検索＞__
 ## 参考
 * mBaaS(iOS)の[ドキュメント](http://mb.cloud.nifty.com/doc/current/#/iOS)
 * Google MAps for iOS の[ドキュメント](https://developers.google.com/maps/documentation/ios-sdk/start)
-* 同じ内容の【Objective-C】版もご用意しています
- * https://github.com/natsumo/ObjcMapApp
+* 同じ内容の【Swift】版もご用意しています
+ * https://github.com/natsumo/SwiftMapApp
