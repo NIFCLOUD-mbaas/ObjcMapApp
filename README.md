@@ -220,10 +220,6 @@ $ pod install --no-repo-update
 
 ### mBaaSの初期設定
 * SDKの詳しい導入方法は、mBaaS の[ドキュメント（クイックスタート）](http://mb.cloud.nifty.com/doc/current/introduction/quickstart_ios.html)をObjc版に書き換えたドキュメントをご用意していますので、ご活用ください
-
-　　　　　__[【Objc版】ドキュメント（クイックスタート）](https://github.com/NIFTYCloud-mbaas/NCMB_ObjcQuickStart)__
-
-
 * SDKの読み込みは下記のコードで行っています
 ```objc
 #import <NCMB/NCMB.h>

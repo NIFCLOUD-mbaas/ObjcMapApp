@@ -107,21 +107,15 @@ static NSArray *SEAECH_RANGE = nil;
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-// 位置情報が更新されるたびに呼ばれるメソッド(非推奨のため調べ直す必要あり)
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    // 値をローカルに保存
-    self.myLocation = newLocation;
-    // TextFieldに表示
-    self.latTextField.text = [NSString stringWithFormat:@"%.6f",newLocation.coordinate.latitude];
-    self.lonTextField.text = [NSString stringWithFormat:@"%.6f",newLocation.coordinate.longitude];
-    self.label.text = @"右上の「保存」をタップしてmBaaSに保存しよう！";
-}
-
 // 位置情報が更新されるたびに呼ばれるメソッド
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     // 値をローカルに保存
     self.myLocation = [locations objectAtIndex:0];
     
+    // TextFieldに表示
+    self.latTextField.text = [NSString stringWithFormat:@"%.6f",self.myLocation.coordinate.latitude];
+    self.lonTextField.text = [NSString stringWithFormat:@"%.6f",self.myLocation.coordinate.longitude];
+    self.label.text = @"右上の「保存」をタップしてmBaaSに保存しよう！";
 }
 
 // 「保存」ボタン押下時の処理
@@ -218,7 +212,7 @@ static NSArray *SEAECH_RANGE = nil;
 /** 【mBaaS：データストア(位置情報)】保存データの取得 **/
 - (void)getLocaion:(NSString *)title {
     // チェック
-    if (self.myLocation) {
+    if (!self.myLocation) {
         return;
     }
     
@@ -394,7 +388,7 @@ static NSArray *SEAECH_RANGE = nil;
             // ファイル取得成功時の処理
             NSLog(@"%@icon画像の取得に成功しました",snippet);
             // 画像アイコン
-            self.marker.icon = [UIImage imageWithData:data];
+            marker.icon = [UIImage imageWithData:data];
         }
     }];
     // マーカー表示時のアニメーションを設定
