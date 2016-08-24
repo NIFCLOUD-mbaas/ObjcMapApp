@@ -226,16 +226,12 @@ static NSArray *SEAECH_RANGE = nil;
     NCMBQuery *queryGeoPoint = [NCMBQuery queryWithClassName:@"GeoPoint"];
     NCMBQuery *queryShop = [NCMBQuery queryWithClassName:@"Shop"];
     // 検索条件を設定
-//    NSInteger index = [SEAECH_RANGE indexOfObjectPassingTest:^BOOL(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        return 0;
-//    }];
-    NSInteger index = 0;
-    for (int i = 0; i < [SEAECH_RANGE count]; i++) {
-        if ([SEAECH_RANGE containsObject:title]) {
-            index = i;
-            break;
+    NSInteger index = [SEAECH_RANGE indexOfObjectPassingTest:^BOOL(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isEqualToString:title]) {
+            return YES;
         }
-    }
+        return NO;
+    }];
     switch (index) {
         case 0:
             NSLog(@"%@",SEAECH_RANGE[0]);
@@ -247,11 +243,13 @@ static NSArray *SEAECH_RANGE = nil;
             [queryShop whereKey:@"geolocation" nearGeoPoint:geoPoint withinKilometers:5.0f];
             break;
         case 2:
+            NSLog(@"%@",SEAECH_RANGE[2]);
             // 半径1km以内(円形検索)
             [queryGeoPoint whereKey:@"geolocation" nearGeoPoint:geoPoint withinKilometers:1.0f];
             [queryShop whereKey:@"geolocation" nearGeoPoint:geoPoint withinKilometers:1.0f];
             break;
         case 3:
+            NSLog(@"%@",SEAECH_RANGE[3]);
             // 新宿駅と西新宿駅の間(矩形検索)
             [queryGeoPoint whereKey:@"geolocation" withinGeoBoxFromSouthwest:shinjukuGeoPoint toNortheast:westShinjukuGeoPoint];
             [queryShop whereKey:@"geolocation" withinGeoBoxFromSouthwest:shinjukuGeoPoint toNortheast:westShinjukuGeoPoint];
