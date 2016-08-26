@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import <NCMB/NCMB.h>
 #import <GoogleMaps/GoogleMaps.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface ViewController ()<CLLocationManagerDelegate>
 // Google Map

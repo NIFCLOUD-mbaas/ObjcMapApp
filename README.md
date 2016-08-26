@@ -229,7 +229,7 @@ $ pod install --no-repo-update
 // mBaaS初期化
 [NCMB setApplicationKey:@"YOUR_NCMB_APPLICATIONKEY" clientKey:@"YOUR_NCMB_CLIENTKEY"];
 ```
-※「`YOUR_APPLICATION_KEY`」と「`YOUR_CLIENT_KEY`」は、mBaaSのダッシュボードで発行したAPIキーに置き換えます
+※「`YOUR_NCMB_APPLICATIONKEY`」と「`YOUR_NCMB_CLIENTKEY`」は、mBaaSのダッシュボードで発行したAPIキーに置き換えます
 
 ### Google Map を表示するための初期設定
 
@@ -242,9 +242,9 @@ $ pod install --no-repo-update
 * SDKの初期化は下記のコードで行っています
 ```objc
 // GoogleMaps初期化
-[GMSServices provideAPIKey:@"YOUR_GOOGLE_MAPS_APYKEY"];
+[GMSServices provideAPIKey:@"YOUR_GOOGLE_MAPS_APIKEY"];
 ```
-※「`YOUR_GOOGLE_MAPS_APYKEY`」は、Google Cloud Platformのダッシュボードで発行したAPIキーに置き換えます
+※「`YOUR_GOOGLE_MAPS_APIKEY`」は、Google Cloud Platformのダッシュボードで発行したAPIキーに置き換えます
 
 ### 位置情報取得のための設定
 
@@ -252,7 +252,7 @@ $ pod install --no-repo-update
 
 
 ```objc
-import CoreLocation
+#import <CoreLocation/CoreLocation.h>
 ```
 
 * `Info.plist`に`NSLocationWhenInUseUsageDescription`を追記しています

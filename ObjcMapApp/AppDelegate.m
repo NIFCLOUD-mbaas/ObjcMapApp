@@ -22,7 +22,7 @@
     [NCMB setApplicationKey:@"YOUR_NCMB_APPLICATIONKEY"
                   clientKey:@"YOUR_NCMB_CLIENTKEY"];
     // GoogleMaps初期化
-    [GMSServices provideAPIKey:@"YOUR_GOOGLE_MAPS_APYKEY"];
+    [GMSServices provideAPIKey:@"YOUR_GOOGLE_MAPS_APIKEY"];
     return YES;
 }
 
