@@ -22,43 +22,70 @@
 // 現在地
 @property (nonatomic) CLLocation *myLocation;
 @property (nonatomic) CLLocationManager *locationManager;
-// マーカー
-@property (nonatomic) GMSMarker *marker;
-// mBaaSデータストア「Shop」クラスデータ格納用
-@property (nonatomic) NSArray *shopData;
 
 @end
-// 新宿駅の位置情報
-const CLLocationDegrees SHINJUKU_LAT = 35.690549;
-const CGFloat SHINJUKU_LON = 139.699550;
+// 新宿駅の情報
+@interface Shinjuku :NSObject
+@property (nonatomic) NSString *title;
+@property (nonatomic) NSString *snippet;
+@property (nonatomic) NCMBGeoPoint *location;
+@property (nonatomic) UIColor *color;
+@end
+@implementation Shinjuku
+- (id)initWithTitle:(NSString *)title snippet:(NSString *)snippet location:(NCMBGeoPoint *)location color:(UIColor *)color {
+    self = [super init];
+    if (self) self.title = title; self.snippet = snippet; self.location = location; self.color = color;
+    return self;
+}
+@end
+// Niftyの情報
+@interface Nifty :NSObject
+@property (nonatomic) NSString *title;
+@property (nonatomic) NSString *snippet;
+@property (nonatomic) NCMBGeoPoint *location;
+@property (nonatomic) NSString *imageName;
+@end
+@implementation Nifty
+- (id)initWithTitle:(NSString *)title snippet:(NSString *)snippet location:(NCMBGeoPoint *)location imageName:(NSString *)imageName {
+    self = [super init];
+    if (self) self.title = title; self.snippet = snippet; self.location = location; self.imageName = imageName;
+    return self;
+}
+@end
+// 新宿駅の情報
+static Shinjuku *SHINJUKU = nil;
+// Niftyの情報
+static Nifty *NIFTY = nil;
 // 西新宿駅の位置情報
-const CGFloat WEST_SHINJUKU_LAT = 35.6945080;
-const CGFloat WEST_SHINJUKU_LON = 139.692692;
-// ニフティの位置情報
-const CGFloat NIFTY_LAT = 35.696144;
-const CGFloat NIFTY_LON = 139.689485;
+static NCMBGeoPoint *WEST_SHINJUKU_LOCATION = nil;
 // ズームレベル
-const CGFloat ZOOM = 14.5;
+static const CGFloat ZOOM = 14.5f;
 // 検索範囲
 static NSArray *SEAECH_RANGE = nil;
-
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // 新宿駅の情報
+    SHINJUKU = [[Shinjuku alloc]initWithTitle:@"新宿駅" snippet:@"Shinjuku Station" location:[NCMBGeoPoint geoPointWithLatitude:35.690549 longitude:139.699550] color:[UIColor greenColor]];
+    // Niftyの情報
+    NIFTY = [[Nifty alloc]initWithTitle:@"ニフティ株式会社" snippet:@"NIFTY Corporation" location:[NCMBGeoPoint geoPointWithLatitude:35.696144 longitude:139.689485] imageName:@"mBaaS.png"];
+    // 西新宿駅の位置情報
+    WEST_SHINJUKU_LOCATION = [NCMBGeoPoint geoPointWithLatitude:35.6945080 longitude:139.692692];
     // 検索範囲
     SEAECH_RANGE = @[@"全件検索", @"現在地から半径5km以内を検索", @"現在地から半径1km以内を検索", @"新宿駅と西新宿駅の間を検索"];
+
     // 位置情報取得開始
     if ([CLLocationManager locationServicesEnabled]) {
         self.locationManager = [[CLLocationManager alloc]init];
         self.locationManager.delegate = self;
         [self.locationManager startUpdatingLocation];
     }
-    
+
     // 起動時は新宿駅に設定
-    [self showMap:SHINJUKU_LAT longitude:SHINJUKU_LON];
-    [self addMarker:SHINJUKU_LAT longitude:SHINJUKU_LON title:@"新宿駅" snippet:@"Shinjuku Station" color:[UIColor greenColor]];
+    [self showMap:SHINJUKU.location];
+    [self addColorMarker:SHINJUKU.location title:SHINJUKU.title snippet:SHINJUKU.snippet color:SHINJUKU.color];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -169,7 +196,7 @@ static NSArray *SEAECH_RANGE = nil;
                     NSLog(@"位置情報の保存に成功しました：%f,%f",geoPoint.latitude,geoPoint.longitude);
                     self.label.text = [NSString stringWithFormat:@"位置情報の保存に成功しました：%f,%f",geoPoint.latitude,geoPoint.longitude];
                     // マーカーを設置
-                    [self addMarker:geoPoint.latitude longitude:geoPoint.longitude title:[object objectForKey:@"title"] snippet:[object objectForKey:@"snippet"] color:[UIColor blueColor]];
+                    [self addColorMarker:geoPoint title:[object objectForKey:@"title"] snippet:[object objectForKey:@"snippet"] color:[UIColor blueColor]];
                 }
             }];
         }]];
@@ -219,10 +246,6 @@ static NSArray *SEAECH_RANGE = nil;
     
     // 現在地
     NCMBGeoPoint *geoPoint = [NCMBGeoPoint geoPointWithLatitude:self.myLocation.coordinate.latitude longitude:self.myLocation.coordinate.longitude];
-    // 新宿駅
-    NCMBGeoPoint *shinjukuGeoPoint = [NCMBGeoPoint geoPointWithLatitude:SHINJUKU_LAT longitude:SHINJUKU_LON];
-    // 西新宿駅
-    NCMBGeoPoint *westShinjukuGeoPoint = [NCMBGeoPoint geoPointWithLatitude:WEST_SHINJUKU_LAT longitude:WEST_SHINJUKU_LON];
     // それぞれのクラスの検索クエリを作成
     NCMBQuery *queryGeoPoint = [NCMBQuery queryWithClassName:@"GeoPoint"];
     NCMBQuery *queryShop = [NCMBQuery queryWithClassName:@"Shop"];
@@ -252,8 +275,8 @@ static NSArray *SEAECH_RANGE = nil;
         case 3:
             NSLog(@"%@",SEAECH_RANGE[3]);
             // 新宿駅と西新宿駅の間(矩形検索)
-            [queryGeoPoint whereKey:@"geolocation" withinGeoBoxFromSouthwest:shinjukuGeoPoint toNortheast:westShinjukuGeoPoint];
-            [queryShop whereKey:@"geolocation" withinGeoBoxFromSouthwest:shinjukuGeoPoint toNortheast:westShinjukuGeoPoint];
+            [queryGeoPoint whereKey:@"geolocation" withinGeoBoxFromSouthwest:SHINJUKU.location toNortheast:WEST_SHINJUKU_LOCATION];
+            [queryShop whereKey:@"geolocation" withinGeoBoxFromSouthwest:SHINJUKU.location toNortheast:WEST_SHINJUKU_LOCATION];
             break;
         default:
             NSLog(@"%@(エラー)",SEAECH_RANGE[0]);
@@ -270,8 +293,7 @@ static NSArray *SEAECH_RANGE = nil;
             NSLog(@"GeoPointクラスの検索に成功しました");
             self.label.text = @"GeoPointクラスの検索に成功しました";
             for (NCMBObject *object in objects) {
-                NCMBGeoPoint *point = [object objectForKey:@"geolocation"];
-                [self addMarker:point.latitude longitude:point.longitude title:[object objectForKey:@"title"] snippet:[object objectForKey:@"snippet"] color:[UIColor blueColor]];
+                [self addColorMarker:[object objectForKey:@"geolocation"] title:[object objectForKey:@"title"] snippet:[object objectForKey:@"snippet"] color:[UIColor blueColor]];
             }
         }
     }];
@@ -285,8 +307,7 @@ static NSArray *SEAECH_RANGE = nil;
             NSLog(@"Shopクラスの検索に成功しました");
             self.label.text = @"Shopクラスの検索に成功しました";
             for (NCMBObject *object in objects) {
-                NCMBGeoPoint *point = [object objectForKey:@"geolocation"];
-                [self addImageMarker:point.latitude longitude:point.longitude title:[object objectForKey:@"shopName"] snippet:[object objectForKey:@"category"] imageName:[object objectForKey:@"image"]];
+                [self addImageMarker:[object objectForKey:@"geolocation"] title:[object objectForKey:@"shopName"] snippet:[object objectForKey:@"category"] imageName:[object objectForKey:@"image"]];
             }
         }
     }];
@@ -295,51 +316,43 @@ static NSArray *SEAECH_RANGE = nil;
 // 「お店（スプーンとフォーク）」ボタン押下時の処理
 - (void)showShops:(UIBarButtonItem *)sender {
     // Shopデータの取得
-    [self getShopData];
-    // チェック
-    if (!self.shopData) {
-        NSLog(@"Shop情報の取得に失敗しました");
-        self.label.text = @"Shop情報の取得に失敗しました";
-        return;
-    }
-    
-    NSLog(@"Shop情報の取得に成功しました");
-    self.label.text = @"Shop情報の取得に成功しました";
-    
-    for (NCMBObject *object in self.shopData) {
-        NCMBGeoPoint *point = [object objectForKey:@"geolocation"];
-        [self addImageMarker:point.latitude longitude:point.longitude title:[object objectForKey:@"shopName"] snippet:[object objectForKey:@"category"] imageName:[object objectForKey:@"image"]];
-    }
-    
+    [self getShopDataWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            // 検索失敗時の処理
+            NSLog(@"Shop情報の取得に失敗しました");
+            self.label.text = @"Shop情報の取得に失敗しました";
+        } else {
+            // 検索成功時の処理
+            NSLog(@"Shop情報の取得に成功しました");
+            self.label.text = @"Shop情報の取得に成功しました";
+            // マーカーを設定
+            for (NCMBObject *shop in objects) {
+                [self addImageMarker:[shop objectForKey:@"geolocation"] title:[shop objectForKey:@"shopName"] snippet:[shop objectForKey:@"category"] imageName:[shop objectForKey:@"image"]];
+            }
+        }
+    }];
 }
 
 /** 【mBaaS：データストア】「Shop」クラスのデータを取得 **/
-- (void)getShopData {
+- (void)getShopDataWithBlock:(NCMBArrayResultBlock)block {
     // 「Shop」クラスの検索クエリを作成
     NCMBQuery *query = [NCMBQuery queryWithClassName:@"Shop"];
     // データストアを検索
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (error) {
-            // 検索失敗時の処理
-            NSLog(@"Shopクラス検索に失敗しました:%ld",(long)error.code);
-        } else {
-            // 検索成功時の処理
-            NSLog(@"Shopクラス検索に成功しました");
-            // AppDelegateに「Shop」クラスの情報を保持
-            self.shopData = objects;
-        }
+        block(objects,error);
     }];
 }
 
 // 「nifty」ボタン押下時の処理
 - (IBAction)showNifty:(UIBarButtonItem *)sender {
     // マーカーを設定
-    [self addImageMarker:NIFTY_LAT longitude:NIFTY_LON title:@"ニフティ株式会社" snippet:@"NIFTY Corporation" imageName:@"mBaaS.png"];
+    [self addImageMarker:NIFTY.location title:NIFTY.title snippet:NIFTY.snippet imageName:NIFTY.imageName];
 }
 
 // 地図を表示
-- (void)showMap:(CLLocationDegrees )latitude longitude:(CLLocationDegrees )longitude {
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:latitude longitude:longitude zoom:ZOOM];
+- (void)showMap:(NCMBGeoPoint *)location {
+    // cameraの作成と設定
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:location.latitude longitude:location.longitude zoom:ZOOM];
     self.mapView.camera = camera;
     // 現在地の有効化
     self.mapView.myLocationEnabled = YES;
@@ -348,52 +361,52 @@ static NSArray *SEAECH_RANGE = nil;
 }
 
 // マーカー作成
-- (void)addMarker:(CLLocationDegrees )latitude longitude:(CLLocationDegrees )longitude title:(NSString *)title snippet:(NSString *)snippet color:(UIColor *)color{
-    
-    self.marker = [[GMSMarker alloc]init];
-    // 位置情報
-    self.marker.position = CLLocationCoordinate2DMake(latitude, longitude);
-    // タイトル
-    self.marker.title = title;
-    // コメント
-    self.marker.snippet = snippet;
-    // アイコン
-    self.marker.icon = [GMSMarker markerImageWithColor:color];
-    // マーカー表示時のアニメーションを設定
-    self.marker.appearAnimation = kGMSMarkerAnimationPop;
-    // マーカーを表示するマップの設定
-    self.marker.map = self.mapView;
-}
-
-// マーカー作成（画像アイコン）
-- (void)addImageMarker:(CLLocationDegrees )latitude longitude:(CLLocationDegrees )longitude title:(NSString *)title snippet:(NSString *)snippet imageName:(NSString *)imageName {
+- (void)addMarker:(NCMBGeoPoint *)location title:(NSString *)title snippet:(NSString *)snippet color:(UIColor *)color imageName:(NSString *)imageName {
     GMSMarker *marker = [[GMSMarker alloc]init];
     // 位置情報
-    marker.position = CLLocationCoordinate2DMake(latitude, longitude);
+    marker.position = CLLocationCoordinate2DMake(location.latitude, location.longitude);
     // shopName
     marker.title = title;
     // category
     marker.snippet = snippet;
-    
-    /** 【mBaaS：ファイルストア】アイコン画像データを取得 **/
-    // ファイル名を設定
-    NCMBFile *imageFile = [NCMBFile fileWithName:imageName data:nil];
-    // ファイルを検索
-    [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-        if (error) {
-            // ファイル取得失敗時の処理
-            NSLog(@"%@icon画像の取得に失敗しました:%ld",snippet,(long)error.code);
-        } else {
-            // ファイル取得成功時の処理
-            NSLog(@"%@icon画像の取得に成功しました",snippet);
-            // 画像アイコン
-            marker.icon = [UIImage imageWithData:data];
-        }
-    }];
-    // マーカー表示時のアニメーションを設定
-    marker.appearAnimation = kGMSMarkerAnimationPop;
-    // マーカーを表示するマップの設定
-    marker.map = self.mapView;
+    // アイコン
+    if (imageName) {
+        /** 【mBaaS：ファイルストア】アイコン画像データを取得 **/
+        // ファイル名を設定
+        NCMBFile *imageFile = [NCMBFile fileWithName:imageName data:nil];
+        // ファイルを検索
+        [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            if (error) {
+                // ファイル取得失敗時の処理
+                NSLog(@"%@icon画像の取得に失敗しました:%ld",snippet,(long)error.code);
+            } else {
+                // ファイル取得成功時の処理
+                NSLog(@"%@icon画像の取得に成功しました",snippet);
+                // 画像アイコン
+                marker.icon = [UIImage imageWithData:data];
+            }
+            // マーカー表示時のアニメーションを設定
+            marker.appearAnimation = kGMSMarkerAnimationPop;
+            // マーカーを表示するマップの設定
+            marker.map = self.mapView;
+        }];
+    } else if (color) {
+        // アイコン
+        marker.icon = [GMSMarker markerImageWithColor:color];
+        // マーカー表示時のアニメーションを設定
+        marker.appearAnimation = kGMSMarkerAnimationPop;
+        // マーカーを表示するマップの設定
+        marker.map = self.mapView;
+    }
+}
+// マーカー作成 (カラーアイコン)
+- (void)addColorMarker:(NCMBGeoPoint *)location title:(NSString *)title snippet:(NSString *)snippet color:(UIColor *)color{
+    [self addMarker:location title:title snippet:snippet color:color imageName:nil];
+}
+
+// マーカー作成（画像アイコン）
+- (void)addImageMarker:(NCMBGeoPoint *)location title:(NSString *)title snippet:(NSString *)snippet imageName:(NSString *)imageName {
+    [self addMarker:location title:title snippet:snippet color:nil imageName:imageName];
 }
 
 // 「ゴミ箱」ボタン押下時の処理
