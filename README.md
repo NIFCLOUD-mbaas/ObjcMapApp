@@ -339,4 +339,4 @@ __＜矩形検索＞__
 * mBaaS(iOS)の[ドキュメント](http://mb.cloud.nifty.com/doc/current/#/iOS)
 * Google MAps for iOS の[ドキュメント](https://developers.google.com/maps/documentation/ios-sdk/start)
 * 同じ内容の【Swift】版もご用意しています
- * https://github.com/natsumo/SwiftMapApp
+ * https://github.com/NIFTYCloud-mbaas/SwiftMapApp
