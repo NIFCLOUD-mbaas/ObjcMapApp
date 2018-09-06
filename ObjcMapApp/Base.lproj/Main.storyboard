@@ -113,10 +113,10 @@
                                             <action selector="showShops:" destination="BYZ-38-t0r" id="zyA-M3-kiF"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="nifty" id="hUs-r4-8Ew">
+                                    <barButtonItem title="nifcloud" id="hUs-r4-8Ew">
                                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <action selector="showNifty:" destination="BYZ-38-t0r" id="SKo-1w-IYu"/>
+                                            <action selector="showNifcloud:" destination="BYZ-38-t0r" id="cVb-yk-DPE"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>

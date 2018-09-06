@@ -38,14 +38,14 @@
     return self;
 }
 @end
-// Niftyの情報
-@interface Nifty :NSObject
+// Nifcloudの情報
+@interface Nifcloud :NSObject
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSString *snippet;
 @property (nonatomic) NCMBGeoPoint *location;
 @property (nonatomic) NSString *imageName;
 @end
-@implementation Nifty
+@implementation Nifcloud
 - (id)initWithTitle:(NSString *)title snippet:(NSString *)snippet location:(NCMBGeoPoint *)location imageName:(NSString *)imageName {
     self = [super init];
     if (self) self.title = title; self.snippet = snippet; self.location = location; self.imageName = imageName;
@@ -54,8 +54,8 @@
 @end
 // 新宿駅の情報
 static Shinjuku *SHINJUKU = nil;
-// Niftyの情報
-static Nifty *NIFTY = nil;
+// Nifcloudの情報
+static Nifcloud *NIFCLOUD = nil;
 // 西新宿駅の位置情報
 static NCMBGeoPoint *WEST_SHINJUKU_LOCATION = nil;
 // ズームレベル
@@ -69,8 +69,8 @@ static NSArray *SEAECH_RANGE = nil;
     [super viewDidLoad];
     // 新宿駅の情報
     SHINJUKU = [[Shinjuku alloc]initWithTitle:@"新宿駅" snippet:@"Shinjuku Station" location:[NCMBGeoPoint geoPointWithLatitude:35.690549 longitude:139.699550] color:[UIColor greenColor]];
-    // Niftyの情報
-    NIFTY = [[Nifty alloc]initWithTitle:@"ニフティ株式会社" snippet:@"NIFTY Corporation" location:[NCMBGeoPoint geoPointWithLatitude:35.696144 longitude:139.689485] imageName:@"mBaaS.png"];
+    // Nifcloudの情報
+    NIFCLOUD = [[Nifcloud alloc]initWithTitle:@"ニフティ株式会社" snippet:@"NIFCLOUD Corporation" location:[NCMBGeoPoint geoPointWithLatitude:35.696144 longitude:139.689485] imageName:@"mBaaS.png"];
     // 西新宿駅の位置情報
     WEST_SHINJUKU_LOCATION = [NCMBGeoPoint geoPointWithLatitude:35.6945080 longitude:139.692692];
     // 検索範囲
@@ -343,10 +343,10 @@ static NSArray *SEAECH_RANGE = nil;
     }];
 }
 
-// 「nifty」ボタン押下時の処理
-- (IBAction)showNifty:(UIBarButtonItem *)sender {
+// 「Nifcloud」ボタン押下時の処理
+- (IBAction)showNifcloud:(UIBarButtonItem *)sender {
     // マーカーを設定
-    [self addImageMarker:NIFTY.location title:NIFTY.title snippet:NIFTY.snippet imageName:NIFTY.imageName];
+    [self addImageMarker:NIFCLOUD.location title:NIFCLOUD.title snippet:NIFCLOUD.snippet imageName:NIFCLOUD.imageName];
 }
 
 // 地図を表示
