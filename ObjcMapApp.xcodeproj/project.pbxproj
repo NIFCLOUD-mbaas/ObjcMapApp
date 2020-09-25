@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65DAAA0FCE9D7463BB0F3B44 /* Pods_ObjcMapApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC7C2341335C915F7A85448 /* Pods_ObjcMapApp.framework */; };
 		9D32A3B81D6597C100EC043F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D32A3B71D6597C100EC043F /* main.m */; };
 		9D32A3BB1D6597C100EC043F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D32A3BA1D6597C100EC043F /* AppDelegate.m */; };
 		9D32A3BE1D6597C100EC043F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D32A3BD1D6597C100EC043F /* ViewController.m */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1CF6C30ABE571CA31B0C8612 /* Pods-ObjcMapApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjcMapApp.release.xcconfig"; path = "Target Support Files/Pods-ObjcMapApp/Pods-ObjcMapApp.release.xcconfig"; sourceTree = "<group>"; };
 		9D32A3B31D6597C100EC043F /* ObjcMapApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjcMapApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D32A3B71D6597C100EC043F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9D32A3B91D6597C100EC043F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -26,6 +28,8 @@
 		9D32A3C21D6597C100EC043F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D32A3C51D6597C100EC043F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9D32A3C71D6597C100EC043F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACC7C2341335C915F7A85448 /* Pods_ObjcMapApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ObjcMapApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D326D167D795EF3547D90E7E /* Pods-ObjcMapApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjcMapApp.debug.xcconfig"; path = "Target Support Files/Pods-ObjcMapApp/Pods-ObjcMapApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +37,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65DAAA0FCE9D7463BB0F3B44 /* Pods_ObjcMapApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24F3A29888DDFBCF6ACAAE63 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D326D167D795EF3547D90E7E /* Pods-ObjcMapApp.debug.xcconfig */,
+				1CF6C30ABE571CA31B0C8612 /* Pods-ObjcMapApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		7E424D8DDEFD0536595DBD25 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ACC7C2341335C915F7A85448 /* Pods_ObjcMapApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9D32A3AA1D6597C100EC043F = {
 			isa = PBXGroup;
 			children = (
 				9D32A3B51D6597C100EC043F /* ObjcMapApp */,
 				9D32A3B41D6597C100EC043F /* Products */,
+				24F3A29888DDFBCF6ACAAE63 /* Pods */,
+				7E424D8DDEFD0536595DBD25 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,9 +110,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9D32A3CA1D6597C100EC043F /* Build configuration list for PBXNativeTarget "ObjcMapApp" */;
 			buildPhases = (
+				3A158447634EF6F9290AD737 /* [CP] Check Pods Manifest.lock */,
 				9D32A3AF1D6597C100EC043F /* Sources */,
 				9D32A3B01D6597C100EC043F /* Frameworks */,
 				9D32A3B11D6597C100EC043F /* Resources */,
+				17BF4342F150B7DB3F59D92A /* [CP] Embed Pods Frameworks */,
+				65F20C3F6F822616B22D99B1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -105,7 +132,7 @@
 		9D32A3AB1D6597C100EC043F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = Nifty;
 				TargetAttributes = {
 					9D32A3B21D6597C100EC043F = {
@@ -118,6 +145,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -143,6 +171,67 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		17BF4342F150B7DB3F59D92A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ObjcMapApp/Pods-ObjcMapApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/NCMB/NCMB.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NCMB.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ObjcMapApp/Pods-ObjcMapApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3A158447634EF6F9290AD737 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ObjcMapApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		65F20C3F6F822616B22D99B1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ObjcMapApp/Pods-ObjcMapApp-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ObjcMapApp/Pods-ObjcMapApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9D32A3AF1D6597C100EC043F /* Sources */ = {
@@ -186,13 +275,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -231,13 +330,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -263,6 +372,7 @@
 		};
 		9D32A3CB1D6597C100EC043F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D326D167D795EF3547D90E7E /* Pods-ObjcMapApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ObjcMapApp/Info.plist;
@@ -275,6 +385,7 @@
 		};
 		9D32A3CC1D6597C100EC043F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CF6C30ABE571CA31B0C8612 /* Pods-ObjcMapApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ObjcMapApp/Info.plist;
