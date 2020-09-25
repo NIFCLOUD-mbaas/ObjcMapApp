@@ -2,18 +2,18 @@
 ![画像001](/readme-img/001.png)
 
 ## 概要
-* [ニフティクラウドmobile backend](http://mb.cloud.nifty.com/)(通称mBaaS)の『位置情報検索』機能を利用して、「現在地情報（緯度経度）をクラウドに保存する・保存したデータを取得して地図に表示する」内容を実装したサンプルプロジェクトです
-* 簡単な操作ですぐに [ニフティクラウドmobile backend](http://mb.cloud.nifty.com/)の機能を体験いただけます★☆
+* [ニフクラ mobile backend](https://mbaas.nifcloud.com/)(通称mBaaS)の『位置情報検索』機能を利用して、「現在地情報（緯度経度）をクラウドに保存する・保存したデータを取得して地図に表示する」内容を実装したサンプルプロジェクトです
+* 簡単な操作ですぐに [ニフクラ mobile backend](https://mbaas.nifcloud.com/)の機能を体験いただけます★☆
 
-## ニフティクラウドmobile backendって何？？
+## ニフクラ mobile backendって何？？
 スマートフォンアプリのバックエンド機能（プッシュ通知・データストア・会員管理・ファイルストア・SNS連携・位置情報検索・スクリプト）が**開発不要**、しかも基本**無料**(注1)で使えるクラウドサービス！
 
-注1：詳しくは[こちら](http://mb.cloud.nifty.com/price.htm)をご覧ください
+注1：詳しくは[こちら](https://mbaas.nifcloud.com/price.htm)をご覧ください
 
 ![画像002](/readme-img/002.png)
 
 ## 事前準備
-* [ニフティクラウドmobile backend](http://mb.cloud.nifty.com/)のアカウントの取得（無料登録）
+* [ニフクラ mobile backend](https://mbaas.nifcloud.com/)のアカウントの取得（無料登録）
 * Googleアカウント（gmailアカウント）の取得
 
 ## 動作環境
@@ -111,18 +111,18 @@ $ pod install --no-repo-update
 
 ![画像011](/readme-img/011.png)
 
-### 3. [mBaaS](http://mb.cloud.nifty.com/)でアプリ作成とAPIキーの発行
+### 3. [mBaaS](https://mbaas.nifcloud.com/)でアプリ作成とAPIキーの発行
 
 * ログイン後、下図のように「アプリの新規作成」画面が表示されるのでアプリを作成します
 
 ![画像003](/readme-img/003.png)
 
 * アプリ作成されると下図のような画面になります
-* この２種類のAPIキー（アプリケーションキーとクライアントキー）はXcodeで作成するiOSアプリに[mBaaS](http://mb.cloud.nifty.com/)を紐付けるために使用します
+* この２種類のAPIキー（アプリケーションキーとクライアントキー）はXcodeで作成するiOSアプリに[mBaaS](https://mbaas.nifcloud.com/)を紐付けるために使用します
 
 ![画像004](/readme-img/004.png)
 
-### 4. [mBaaS](http://mb.cloud.nifty.com/)にお店データとアイコン画像をインポート
+### 4. [mBaaS](https://mbaas.nifcloud.com/)にお店データとアイコン画像をインポート
 
 * ダウンロードしたプロジェクトフォルダ内にある「setting」フォルダ内のデータをmBaaSにインポートします
 
@@ -173,7 +173,7 @@ $ pod install --no-repo-update
 ![画像014](/readme-img/014.png)
 
 * プロジェクトが開いたら、`AppDelegate.m`を編集します
-* 先程[mBaaS](http://mb.cloud.nifty.com/)のダッシュボード上で確認したAPIキーと[Google Cloud platform](https://console.cloud.google.com/)で発行したAPIキーを貼り付けます
+* 先程[mBaaS](https://mbaas.nifcloud.com/)のダッシュボード上で確認したAPIキーと[Google Cloud platform](https://console.cloud.google.com/)で発行したAPIキーを貼り付けます
 
 ![画像007](/readme-img/007.png)
 
@@ -205,7 +205,7 @@ $ pod install --no-repo-update
 
 -----
 
-* 保存に成功したら、[mBaaS](http://mb.cloud.nifty.com/)のダッシュボードから保存先の「データストア」を確認してみましょう！
+* 保存に成功したら、[mBaaS](https://mbaas.nifcloud.com/)のダッシュボードから保存先の「データストア」を確認してみましょう！
 * 新しく「GeoPoint」クラスが作成され、その中にデータが保存されていることを確認できます
  * 下の例は、タイトルに「和食」、コメントに「ワンコインで食べられる！」と入れた場合です
 
@@ -218,7 +218,7 @@ $ pod install --no-repo-update
 サンプルプロジェクトに実装済みの内容のご紹介
 
 ### mBaaSの初期設定
-* SDKの詳しい導入方法は、mBaaS の[ドキュメント（クイックスタート）](http://mb.cloud.nifty.com/doc/current/introduction/quickstart_ios.html)をObjc版に書き換えたドキュメントをご用意していますので、ご活用ください
+* SDKの詳しい導入方法は、mBaaS の[ドキュメント（クイックスタート）](https://mbaas.nifcloud.com/doc/current/introduction/quickstart_ios.html)をObjc版に書き換えたドキュメントをご用意していますので、ご活用ください
 * SDKの読み込みは下記のコードで行っています
 ```objc
 #import <NCMB/NCMB.h>
@@ -335,7 +335,7 @@ __＜矩形検索＞__
 ```
 
 ## 参考
-* mBaaS(iOS)の[ドキュメント](http://mb.cloud.nifty.com/doc/current/#/iOS)
+* mBaaS(iOS)の[ドキュメント](https://mbaas.nifcloud.com/doc/current/#/iOS)
 * Google MAps for iOS の[ドキュメント](https://developers.google.com/maps/documentation/ios-sdk/start)
 * 同じ内容の【Swift】版もご用意しています
- * https://github.com/NIFTYCloud-mbaas/SwiftMapApp
+ * https://github.com/NIFCloud-mbaas/SwiftMapApp
