@@ -19,9 +19,9 @@
 ## 動作環境
 ※下記内容で動作確認をしています
 
-* Mac OS Mojave
-* Xcode ver. 11.0 
-* iPhone6s(iOS 13.1)
+* Mac OS 10.15(Catalina)
+* Xcode ver. 12.0
+* iPhone11 (iOS14.0)
  * このサンプルアプリは、端末の位置情報を使用するため、実機ビルドが必要です
 
 ## サンプルアプリ概要と使い方
