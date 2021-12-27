@@ -19,9 +19,10 @@
 ## 動作環境
 ※下記内容で動作確認をしています
 
-* Mac OS 10.15(Catalina)
-* Xcode ver. 12.0
-* iPhone11 (iOS14.0)
+* Mac OS 11.6(Big Sur)
+* Xcode Version 13.0
+* Simulator Version 13.0(970)
+* iPhone X (iOS15.0.2)
  * このサンプルアプリは、端末の位置情報を使用するため、実機ビルドが必要です
 
 ## サンプルアプリ概要と使い方
