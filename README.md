@@ -152,7 +152,7 @@ $ pod install --no-repo-update
 ### 5. [Google Cloud platform](https://console.cloud.google.com/)でプロジェクトの作成とAPIキーの発行、Google Maps SDK for iOS の許可
 
 *  [Google Cloud platform](https://console.cloud.google.com/)にログインします
-* プリジェクトを作成します
+* プロジェクトを作成します
  * プロジェクト名は任意で作成します　例）MapApp
 
 ![画像GCP001](/readme-img/GCP001.png)
