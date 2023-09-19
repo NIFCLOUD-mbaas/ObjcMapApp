@@ -19,9 +19,9 @@
 ## 動作環境
 ※下記内容で動作確認をしています
 
-* Mac OS 12.5.1 (Monterey)
+* Mac OS 13.5.2 (Ventura)
 * Xcode Version 14.0
-* iPhone X (iOS 16)
+* iPhone SE (iOS 17)
  * このサンプルアプリは、端末の位置情報を使用するため、実機ビルドが必要です
 
 ## サンプルアプリ概要と使い方
@@ -152,7 +152,7 @@ $ pod install --no-repo-update
 ### 5. [Google Cloud platform](https://console.cloud.google.com/)でプロジェクトの作成とAPIキーの発行、Google Maps SDK for iOS の許可
 
 *  [Google Cloud platform](https://console.cloud.google.com/)にログインします
-* プリジェクトを作成します
+* プロジェクトを作成します
  * プロジェクト名は任意で作成します　例）MapApp
 
 ![画像GCP001](/readme-img/GCP001.png)
